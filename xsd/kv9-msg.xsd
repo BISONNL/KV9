@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by Jan Koers (InTraffic B.V.) -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- Copyright:	Dit document is eigendom van Platform BISON onder de Stichting Connekt, -->
+<!--            en wordt gepubliceerd onder de Creative Commons Licentie by-nd/3.0/nl,  -->
+<!--            zie http://creativecommons.org/licences/by-nd/3.0/nl                    -->
+<!-- Opmerking: XSD is gebaseerd op TMI8 koppelvlak 9 versie 8.1.0.0               		-->
+<!-- Versie:   1.0 (release)   (17-2-2011)                                        		-->
+<!-- Historie:                                                                          -->
+<!--          0.1: initiele versie gebaseerd op concept e                               -->
+<!--          0.2: tweede versie gebaseerd op concept f	                                -->
+<!--          0.3: derde versie gebaseerd op concept g	                                -->
+<!--          0.4: vierde versie gebaseerd op concept h	                                -->
+<!--          0.5: vijfde versie gebaseerd op concept i	                                -->
+<!--          0.6: zesde versie gebaseerd op concept j	                                -->
+<!--          0.7: zevende versie gebaseerd op concept k	                            -->
+<!--          0.8: achste versie gebaseerd op prerelease l	                            -->
+<!--          1.0: negende versie gebaseerd op release 	                            	-->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tmi8="http://bison.connekt.nl/tmi8/kv9/msg" xmlns:tmi8c="http://bison.connekt.nl/tmi8/kv9/core" targetNamespace="http://bison.connekt.nl/tmi8/kv9/msg" elementFormDefault="qualified">
+	<xs:import namespace="http://bison.connekt.nl/tmi8/kv9/core" schemaLocation="kv9-core.xsd"/>
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<!-- TMI KV9 messages                                                                  -->
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<xs:element name="VV_TM_PUSH">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:group ref="tmi8:MessageProperties"/>
+				<xs:sequence maxOccurs="unbounded">
+					<xs:choice>
+						<xs:element name="KV9tlcdef" type="tmi8:KV9tlcdefType" maxOccurs="unbounded"/>
+						<xs:element name="KV9tlcend" type="tmi8:KV9tlcendType" maxOccurs="unbounded"/>
+					</xs:choice>
+				</xs:sequence>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="VV_TM_REQ">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:group ref="tmi8:MessageProperties"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="VV_TM_RES">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:group ref="tmi8:MessageProperties" minOccurs="0"/>
+				<xs:element name="ResponseCode" type="tmi8:ResponseCodeType"/>
+				<xs:element name="ResponseError" type="tmi8:ResponseErrorType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<!-- Dossiers: KV9messages                                                             -->
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<xs:complexType name="KV9tlcdefType">
+		<xs:sequence>
+			<xs:sequence maxOccurs="unbounded">
+				<xs:element name="RSEQDEFS" type="tmi8:RSEQDEFSType" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="tmi8c:delimiter"/>
+				<xs:any namespace="##targetNamespace ##local" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="KV9tlcendType">
+		<xs:sequence>
+			<xs:sequence maxOccurs="unbounded">
+				<xs:element name="RSEQEND" type="tmi8:RSEQENDType" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="tmi8c:delimiter"/>
+				<xs:any namespace="##targetNamespace ##local" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RSEQDEFSType">
+		<xs:sequence>
+			<xs:element name="RSEQDEF" type="tmi8:RSEQDEFType"/>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="tmi8c:delimiter"/>
+				<xs:any namespace="##targetNamespace ##local" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<!-- Message entities                                                                  -->
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<xs:complexType name="RSEQENDType">
+		<xs:sequence>
+			<xs:element name="dataownercode" type="tmi8:dataownercodeType"/>
+			<xs:element name="karaddress" type="tmi8:karaddressType"/>
+			<xs:element name="invalidfrom" type="tmi8:tmidateType"/>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="tmi8c:delimiter"/>
+				<xs:any namespace="##targetNamespace ##local" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RSEQDEFType">
+		<xs:sequence>
+			<xs:element name="dataownercode" type="tmi8:dataownercodeType"/>
+			<xs:element name="karaddress" type="tmi8:karaddressType"/>
+			<xs:element name="rseqtype" type="tmi8:RSEQtypeType"/>
+			<xs:element name="validfrom" type="tmi8:tmidateType"/>
+			<xs:element name="validuntil" type="tmi8:tmidateType" minOccurs="0"/>
+			<xs:element name="crossingcode" type="tmi8:codeType"/>
+			<xs:element name="town" type="tmi8:townType"/>
+			<xs:element name="description" type="tmi8:descriptionType" minOccurs="0"/>
+			<xs:element name="KARATTRIBUTES" type="tmi8:KARATTRIBUTESType" maxOccurs="unbounded"/>
+			<xs:element name="ACTIVATIONPOINT" type="tmi8:ACTIVATIONPOINTType" maxOccurs="unbounded"/>
+			<xs:element name="MOVEMENT" type="tmi8:MOVEMENTType" maxOccurs="unbounded"/>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="tmi8c:delimiter"/>
+				<xs:any namespace="##targetNamespace ##local" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="KARATTRIBUTESType">
+		<xs:sequence>
+			<xs:element name="karservicetype" type="tmi8:karservicetypeType"/>
+			<xs:element name="karcommandtype" type="tmi8:karcommandtypeType"/>
+			<xs:element name="karusedattributes" type="tmi8:karusedattributesType"/>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="tmi8c:delimiter"/>
+				<xs:any namespace="##targetNamespace ##local" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ACTIVATIONPOINTType">
+		<xs:sequence>
+			<xs:element name="activationpointnumber" type="tmi8:activationpointnumberType"/>
+			<xs:element name="rdx-coordinate" type="tmi8:rdcoordinateType"/>
+			<xs:element name="rdy-coordinate" type="tmi8:rdcoordinateType"/>
+			<xs:element name="label" type="tmi8:labelType" minOccurs="0"/>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="tmi8c:delimiter"/>
+				<xs:any namespace="##targetNamespace ##local" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MOVEMENTType">
+		<xs:sequence>
+			<xs:element name="movementnumber" type="tmi8:movementnumberType"/>
+			<xs:element name="BEGIN" type="tmi8:BEGINType" minOccurs="0"/>
+			<xs:element name="ACTIVATION" type="tmi8:ACTIVATIONType" maxOccurs="unbounded"/>
+			<xs:element name="END" type="tmi8:ENDType"/>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="tmi8c:delimiter"/>
+				<xs:any namespace="##targetNamespace ##local" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BEGINType">
+		<xs:annotation id="E96_begin">
+			<xs:documentation xml:lang="nl"> 
+			BEGIN - punt is een begin punt, markeert het begin van de beweging
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="activationpointnumber" type="tmi8:activationpointnumberType"/>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="tmi8c:delimiter"/>
+				<xs:any namespace="##targetNamespace ##local" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ACTIVATIONType">
+		<xs:annotation id="E96_activatie">
+			<xs:documentation xml:lang="nl"> 
+			ACTIVATION - punt is een meldpunt, markeert op welke locatie welke signaalgroep en/of  localloop verstuurt dient te worden
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ACTIVATIONPOINTSIGNAL" type="tmi8:ACTIVATIONPOINTSIGNALType" maxOccurs="unbounded"/>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="tmi8c:delimiter"/>
+				<xs:any namespace="##targetNamespace ##local" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ENDType">
+		<xs:annotation id="E96_end">
+			<xs:documentation xml:lang="nl"> 
+			END - punt is een eindpunt, markeert het eind van de beweging
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="activationpointnumber" type="tmi8:activationpointnumberType"/>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="tmi8c:delimiter"/>
+				<xs:any namespace="##targetNamespace ##local" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ACTIVATIONPOINTSIGNALType">
+		<xs:sequence>
+			<xs:element name="activationpointnumber" type="tmi8:activationpointnumberType"/>
+			<xs:element name="karvehicletype" type="tmi8:karvehicletypeType"/>
+			<xs:element name="karcommandtype" type="tmi8:karcommandtypeType"/>
+			<xs:element name="triggertype" type="tmi8:triggertypeType"/>
+			<xs:element name="distancetillstopline" type="tmi8:distancetillstoplineType" minOccurs="0"/>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="signalgroupnumber" type="tmi8:signalgroupnumberType"/>
+					<xs:element name="virtuallocalloopnumber" type="tmi8:virtuallocalloopnumberType" minOccurs="0"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element name="virtuallocalloopnumber" type="tmi8:virtuallocalloopnumberType"/>
+				</xs:sequence>
+			</xs:choice>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="tmi8c:delimiter"/>
+				<xs:any namespace="##targetNamespace ##local" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<!-- Message property types                                                            -->
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<xs:group name="MessageProperties">
+		<xs:sequence>
+			<xs:element name="SubscriberID" type="tmi8:SubscriberIDType"/>
+			<xs:element name="Version" type="tmi8:VersionType"/>
+			<xs:element name="DossierName" type="tmi8:DossierNameType"/>
+			<xs:element name="Timestamp" type="tmi8:TimestampType"/>
+		</xs:sequence>
+	</xs:group>
+	<xs:simpleType name="DossierNameType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="KV9tlcdef"/>
+			<xs:enumeration value="KV9tlcend"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VersionType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubscriberIDType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TimestampType">
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<xs:simpleType name="ResponseCodeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="OK"/>
+			<xs:enumeration value="NOK"/>
+			<xs:enumeration value="SE"/>
+			<xs:enumeration value="NA"/>
+			<xs:enumeration value="PE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResponseErrorType">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<!-- Common entity types                                                               -->
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<xs:simpleType name="dataownercodeType">
+		<xs:annotation id="E1">
+			<xs:documentation xml:lang="nl">
+				Een en ander bepaalt volgens BISON enumeratie E1.
+				Op dit moment bekende waardes zijn:
+				Vervoerders: ARR, VTN, CXX, GVB, HTM, NS, RET, SYNTUS, QBUZZ, TCR,
+				Integrators:  ALGEMEEN, GOVI, RIG, SABIMOS, PRORAIL
+				maar elke waarde is toegestaan
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="codeType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="labelType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tmidateType">
+		<xs:annotation>
+			<xs:documentation>Format: YYYY-MM-DD</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date">
+			<xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+			<!--
+			<xs:minLength value="10"/>
+			<xs:maxLength value="10"/> -->
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tmidatetimeType">
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<!-- General messages entity types                                                     -->
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<xs:simpleType name="RSEQtypeType">
+		<xs:annotation id="E90">
+			<xs:documentation xml:lang="nl">
+				CROSSING - VRI, reguleert verkeersstromen op kruispunten
+				GUARD - bewaking, geeft alarm bij nadering OV of hulpdienst
+				BAR - afsluiting of afzinkbare paal, verdwijnt bij nadering OV of hulpdienst
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CROSSING"/>
+			<xs:enumeration value="GUARD"/>
+			<xs:enumeration value="BAR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="townType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="descriptionType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="karaddressType">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="65535"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="movementnumberType">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="activationpointnumberType">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="9999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="rdcoordinateType">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="999999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="karcommandtypeType">
+		<xs:annotation id="E91">
+			<xs:documentation xml:lang="nl">  
+				0 - gereserveerd - niet gebruiken;
+				1 - inmeldpunt ; 
+				2 - uitmeldpunt ; 
+				3 - voorinmeldpunt
+				4 t/m 99 - gereserveer - niet gebruiken.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="karvehicletypeType">
+		<xs:annotation id="E93">
+			<xs:documentation xml:lang="nl"> 
+			0 - gereserveerd - niet gebruiken ;
+			1 - bus ; 
+			2 - tram ; 
+			3 - politie in uniform; 
+			4 - brandweer ;
+			5 - ambulance ; 
+			6 - CVV ; 
+			7 - taxi ; 
+			8 t/m 68 - gereserveerd - niet gebruiken ;
+			69 - politie niet in uniform ; 
+			70 - marechaussee ; 
+			71 - HOV bus ;
+			72 t/m 98 - gereserveerd - vrij te gebruiken; 
+			99 - gereserveerd - niet gebruiken
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="98"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="karusedattributesType">
+		<xs:annotation>
+			<xs:documentation xml:lang="nl">
+				Identificeert de te vullen attributen in het KAR bericht, zie KARb1 bericht definitie voor “Used atrributes”.
+				Een ‘1’ geeft aan dat het betreffende attribuut gevuld moet worden, een ‘0’ geeft aan dat het betreffende attribuut niet gevuld mag worden. 
+				Het meest rechtse bit (LSB) in de bitstring komt overeen met het KAR bericht attribuut (CVN Nr) 1. (000000000000000000000001)
+				Het meest linkse bit (MSB) in de bitstring komt overeen met het KAR bericht attribuut (CVN Nr) 24.(1000000000000000000000000)
+				Spaties etc worden verwijderd voor verwerking
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:pattern value="(0|1){24}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="signalgroupnumberType">
+		<xs:annotation id="E94">
+			<xs:documentation xml:lang="nl"> 
+			0 - geen informatie - niet gebruiken ; 
+			1 t/m 255 - signaalgroepnummer, bevat de fase die overeenkomt met de gewenste voortuigbeweging ;
+			201 t/m 255 - speciaal, zie KAR 1.24 documentatie
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="triggertypeType">
+		<xs:annotation id="E92">
+			<xs:documentation xml:lang="nl"> 
+			STANDARD - De vervoerder welke de lijn exploiteert bepaalt of het bericht direct verstuurd wordt of dat er een aanvullende conditie geldt.
+			FORCED - Forceert altijd een automatische inmelding ongeacht het soort lijn en de eventuele aanwezigheid van een halte voor het verkeerssysteem.
+			MANUAL - Altijd handmatig aanmelden, de chauffeur bepaalt wanneer er ingemeldt wordt
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="STANDARD"/>
+			<xs:enumeration value="FORCED"/>
+			<xs:enumeration value="MANUAL"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="karservicetypeType">
+		<xs:annotation id="E95">
+			<xs:documentation xml:lang="nl"> 
+			PT - KarUsedAttributen voor public transport
+			ES - KarUsedAttributen voor emergency service
+			OT - KarUsedAttributes voor other service
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PT"/>
+			<xs:enumeration value="ES"/>
+			<xs:enumeration value="OT"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="distancetillstoplineType">
+		<xs:annotation>
+			<xs:documentation>
+				-99 t/m +9999
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="-99"/>
+			<xs:maxInclusive value="9999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="virtuallocalloopnumberType">
+		<xs:annotation>
+			<xs:documentation>
+				vetaglusnummer 0 t/m +127
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="127"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+</xs:schema>
