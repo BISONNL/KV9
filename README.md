@@ -1,4 +1,5 @@
-KV9
-===
+# KV9 - KAR meldpunten
 
-KAR Meldpunten
+De documentatie is te vinden op de [BISON website](http://bison.dova.nu/standaarden/kv9).
+
+Het XSD en evt. voorbeelden staan hier op github - zoek de juiste [release](http://github.com/BISONNL/KV9/releases)!
